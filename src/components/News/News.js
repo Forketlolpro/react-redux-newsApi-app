@@ -20,7 +20,7 @@ News.propTypes = {
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired
+    content: PropTypes.string
 };
 
 export default News;
