@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 
 import {REQUEST_NEWS, RECEIVE_NEWS, LOG_IN, LOG_OUT} from '../actions/actions';
 
+function initFromLocalStorage () {
+  return localStorage.getItem('loggedIn') ? true : false;
+}
 
-
-function app (state = {loggedIn: false}, action) {
+function app (state = {loggedIn: initFromLocalStorage()}, action) {
     switch (action.type) {
         case LOG_IN:
           return Object.assign({}, state, {

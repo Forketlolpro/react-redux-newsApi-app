@@ -35,6 +35,22 @@ export const logOut = () => {
     }
 }
 
+function shouldFetchNews(state) {
+  const news = state.news.items
+  if (!news.lenght) {
+    return true
+  } else if (news.isFetching) {
+    return false
+  }
+}
+
+export function fetchNewsIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchNews(getState())) {
+      return dispatch(fetchNews())
+    }
+  }
+}
 
 export function fetchNews() {
     return (dispatch) => {

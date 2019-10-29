@@ -2,7 +2,7 @@ import React from 'react';
 import Login from '../Login/Login';
 import Home from '../Home/Home';
 import { connect } from 'react-redux';
-import {fetchNews, logIn} from '../../actions/actions';
+import {fetchNewsIfNeeded, logIn} from '../../actions/actions';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 
 import './App.css';
@@ -10,25 +10,22 @@ import './App.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    if (localStorage.getItem('loggedIn') === 'true') {
-      this.props.dispatch(logIn());
-    }
   }
 
   componentDidMount () {
-    this.props.dispatch(fetchNews());
+    if (this.props.loggedIn) {
+      this.props.dispatch(fetchNewsIfNeeded());
+    }
   }
 
   render () {
     return (
     <>
-      <div className="App">APP</div>
       <Router>
         <Switch>
-          <Route exact path="/">{this.props.loggedIn !== true ? <Redirect to="/login" /> : <Redirect to="/" />}</Route>
+          <Route exact path="/">{!this.props.loggedIn ? <Redirect to="/login" /> : <Home />}</Route>
           <Router path="/login">
-            <Login/>
+            <Login loginHandler={()=>{this.props.dispatch(logIn())}}/>
           </Router>
         </Switch>
       </Router>

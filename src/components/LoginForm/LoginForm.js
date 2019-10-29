@@ -1,19 +1,39 @@
 import React from 'react';
+import './LoginForm.css';
 
-const LoginForm = (props) => {
-    return (
-    <form onSubmit={(e)=>{e.preventDefault();console.log('submit')}}>
-        <label>
-            Имя:
-            <input type='text'/>
-        </label>
-        <label>
-            Пароль
-            <input type='password'/>
-        </label>
-        <button type='submit'>Войти</button>
-    </form>
-    );
+class LoginForm extends React.Component {
+    constructor (props) {
+        super(props);
+        this.allertSpanRef = React.createRef();
+    }
+    
+    onSubmitHandler = (e) => {
+        e.preventDefault();
+        if (e.target[0].value !== 'admin' || e.target[1].value !== '12345') {
+            this.allertSpanRef.current.innerText= 'Имя пользователя или пароль введены неверно';
+            return false;
+        }
+        this.props.handler();
+        localStorage.setItem('loggedIn', '1');
+        window.location='./';
+    }
+
+    render() {
+        return (
+        <form onSubmit={this.onSubmitHandler} className='LoginForm'>
+            <span ref={this.allertSpanRef}></span>
+            <label>
+                Имя:
+                <input required type='text'/>
+            </label>
+            <label>
+                Пароль:
+                <input required type='password'/>
+            </label>
+            <button type='submit'>Войти</button>
+        </form>
+        )
+    }
 }
 
 export default LoginForm;
