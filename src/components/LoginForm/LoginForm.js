@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './LoginForm.css';
 
 class LoginForm extends React.Component {
@@ -34,6 +35,10 @@ class LoginForm extends React.Component {
         </form>
         )
     }
+}
+
+LoginForm.propTypes = {
+    handler: PropTypes.func.isRequired
 }
 
 export default LoginForm;

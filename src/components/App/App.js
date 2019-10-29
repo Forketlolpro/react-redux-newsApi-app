@@ -18,14 +18,20 @@ class App extends React.Component {
     }
   }
 
+  loginHandler = () => {
+    this.props.dispatch(logIn());
+  }
+
   render () {
     return (
     <>
       <Router>
         <Switch>
-          <Route exact path="/">{!this.props.loggedIn ? <Redirect to="/login" /> : <Home />}</Route>
+          <Route exact path="/">
+            {!this.props.loggedIn ? <Redirect to="/login" /> : <Home news={this.props.news}/>}
+          </Route>
           <Router path="/login">
-            <Login loginHandler={()=>{this.props.dispatch(logIn())}}/>
+            <Login loginHandler={this.loginHandler}/>
           </Router>
         </Switch>
       </Router>

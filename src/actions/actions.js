@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 const API_KEY = '1e8b4dc819d6466ea8058c7e399eba6e';
-const ROOT_URL = `https://newsapi.org/v2/top-headlines?country=ru&apiKey=${API_KEY}`;
+const ROOT_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
 
 export const REQUEST_NEWS = 'REQUEST_NEWS';
 export const RECEIVE_NEWS = 'RECEIVE_NEWS';

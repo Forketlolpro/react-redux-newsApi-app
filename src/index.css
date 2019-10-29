@@ -14,7 +14,9 @@ code {
 
 #root {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
   align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
 }
